@@ -1,23 +1,19 @@
 import React, {useEffect, useState} from 'react';
-import {Grid, Pagination, PaginationItem, Stack, TablePagination} from '@mui/material';
+import {Grid, Pagination, Stack} from '@mui/material';
 import {useDispatch, useSelector} from "react-redux";
 import {getProducts} from "./productsSlice";
 import { selectProducts } from "./productsSlice";
 import Product from "./Product";
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-
 
 export default function Listing() {
-    const [state, setState] = useState({page: 0});
+    const [state, setState] = useState({page: 1});
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getProducts())
     }, []);
-    const {results: products} = useSelector(selectProducts);
-
+    const {count, results: products} = useSelector(selectProducts);
+    debugger;
     const handlePageChange = (event, newPage) => {
-        newPage = newPage - 1;
         if (newPage > state.page)
             dispatch(getProducts(newPage));
         if (newPage < state.page)
@@ -36,14 +32,14 @@ export default function Listing() {
                     </header>
                     <div style={{marginLeft: 20, marginRight: 30, paddingLeft:'7%', paddingRight: 0}}>
                         <Grid container justify="center" spacing={2}>
-                            {products.results?.map((product) => (
+                            {products?.map((product) => (
                                 <Product content={product}/>
                             ))}
                         </Grid>
                     </div>
                     <Stack spacing={2} sx={{position:'absolute', left: "40%", marginTop: 4, paddingBottom: 10}}>
                       <Pagination
-                        count={2}
+                        count={Math.ceil(count/20)}
                         color={"primary"}
                         variant="outlined"
                         size="large"

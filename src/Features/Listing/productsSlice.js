@@ -13,8 +13,8 @@ export const productsSlice = createSlice({
   },
   reducers: {
       setProducts: (state, action) => {
-          state.products.results = action.payload;
-          state.products.count = action.payload.length;
+          state.products.results = action.payload.results;
+          state.products.count = action.payload.count;
       },
   },
 })
@@ -28,7 +28,7 @@ export const getProducts = (page) => (dispatch) => {
     let config = {
         headers: Header,
     };
-    let page_no = !page ? 0 : page;
+    let page_no = !page ? 1 : page;
     axios.get(`http://0.0.0.0:8000/shop/api/products/?page=${page_no}`, config).then((res) => {
         dispatch(setProducts(res.data));
     }).catch((err) => {
