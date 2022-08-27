@@ -12,7 +12,6 @@ export default function Listing() {
         dispatch(getProducts())
     }, []);
     const {count, results: products} = useSelector(selectProducts);
-    debugger;
     const handlePageChange = (event, newPage) => {
         if (newPage > state.page)
             dispatch(getProducts(newPage));
@@ -20,6 +19,7 @@ export default function Listing() {
             dispatch(getProducts(newPage));
         setState({page: newPage});
     };
+    debugger;
 
     return(
         <div className="page">

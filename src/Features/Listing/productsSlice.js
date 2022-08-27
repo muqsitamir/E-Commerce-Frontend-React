@@ -29,7 +29,7 @@ export const getProducts = (page) => (dispatch) => {
         headers: Header,
     };
     let page_no = !page ? 1 : page;
-    axios.get(`http://0.0.0.0:8000/shop/api/products/?page=${page_no}`, config).then((res) => {
+    axios.get(`http://api.heritagecraft.pk/shop/api/products/?page=${page_no}`, config).then((res) => {
         dispatch(setProducts(res.data));
     }).catch((err) => {
         // dispatch(setSnackBar(err.response.data.non_field_errors[0]));
