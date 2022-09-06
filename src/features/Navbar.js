@@ -13,12 +13,11 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import {Grid, Stack} from "@mui/material";
 import { Link } from "react-router-dom";
-import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+import SimpleAccordion from '../components/Accordion'
 import axios from "axios";
 import {useEffect} from "react";
 import {useDispatch} from "react-redux";
 
-const pages = ['Products','ali', "wadood", "amer", 'Islam'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const Header = {
@@ -29,7 +28,7 @@ const Header = {
 
 
 const ResponsiveAppBar = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = React.useState("hidden");
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [hoverStyle, setHoverStyle] = React.useState({weight: '', scale: ''});
   const [menuData, setMenuData] = React.useState([]);
@@ -52,15 +51,12 @@ const ResponsiveAppBar = () => {
         })
   }
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
+  const handleClickNavMenu = () => {
+      let visibility = anchorElNav === "hidden" ? "visible" : "hidden";
+      setAnchorElNav(visibility);
   };
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
   };
 
   const handleCloseUserMenu = () => {
@@ -94,35 +90,11 @@ const ResponsiveAppBar = () => {
               aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
-              onClick={handleOpenNavMenu}
+              onClick={handleClickNavMenu}
               color="inherit"
             >
               <MenuIcon />
             </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
           </Box>
           <Box sx={{display: {xs: 'flex', md: "none"}, marginTop:{xs: '10px', sm: '0px'}, flexGrow: 1.4}}>
              <Link to='/'><img style={{height: '40px'}} src={require('../images/logo.png')} /></Link>
@@ -158,15 +130,14 @@ const ResponsiveAppBar = () => {
           </Box>
         </Toolbar>
           <Grid container alignItems='center' justifyContent='center' direction='column' >
-            <Box sx={{ marginTop: '30px',maxHeight: '10px', flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            <Box sx={{ marginTop: '37px',maxHeight: '10px', flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {menuData.map((page) => (
-              <Link to={'/'+ page.name} style={{textDecoration: 'none'}}>
+                <Link to={'/'+ page.name} style={{textDecoration: 'none'}}>
                 <Button
                     id={page.name}
                     key={page.name}
                     onMouseEnter={handleHover}
                     onMouseLeave={handleUnhover}
-                    onClick={handleCloseNavMenu}
                     sx={{mx: 1,maxHeight: '35px', my: 2, fontWeight: 'bold',display: 'block', color: hoverStyle.color, fontStyle: hoverStyle.style, transform: hoverStyle.scale }}
                     >
                     {page.name}
@@ -177,22 +148,35 @@ const ResponsiveAppBar = () => {
           </Grid>
       </Container>
     </AppBar>
+    <Box sx={{display: { xs: 'block', md: 'none' }, visibility: anchorElNav, backgroundColor: 'white', marginTop: "2px", position: "fixed", right: 0, left: 0}}>
+        <SimpleAccordion mainItems={menuData}/>
+    </Box >
     {menuData.map((page) => (
-        <div id={page.name + "-id"} onMouseEnter={handleHover} onMouseLeave={handleUnhover} style={{columnGap: '30px', display: 'flex', justifyContent: 'center', alignItems: "center", alignSelf: 'start', boxShadow: '0px 15px 10px -15px #111', visibility: "hidden", height: '330px', backgroundColor: 'white', marginTop: -6, position: "fixed", right: 0, left: 0}}>
-            <span style={{height: '300px'}}>
-                 <h1 style={{fontStyle: "italic"}}>{page.name}</h1>
-                 <p style={{color: '#7a7a7a', fontSize: '11px', maxWidth: '300px'}}>{page.description}</p>
+        <div id={page.name + "-id"} onMouseEnter={handleHover} onMouseLeave={handleUnhover} style={{columnGap: '10px', display: 'flex', justifyContent: 'center', alignItems: "center", alignSelf: 'start', boxShadow: '0px 15px 10px -15px #111', visibility: "hidden", height: '330px', backgroundColor: 'white', marginTop: -6, position: "fixed", right: 0, left: 0}}>
+            <span style={{marginLeft: '30px', height: '300px'}}>
+                <Link to={'/'+ page.name} style={{textDecoration: 'none', color: 'black'}}>
+                    <h1 style={{fontStyle: "italic"}}>{page.name}</h1>
+                </Link>
+                <p style={{color: '#7a7a7a', fontSize: '11px', maxWidth: '300px'}}>{page.description}</p>
             </span>
             {page.categories.map((category) => (
                     <span style={{height: '250px'}}>
-                    <h2>{category.name}</h2>
+                    <Link to={'/' + page.name + '/' +category.name} style={{textDecoration: 'none', color: 'black'}}>
+                        <h2>{category.name}</h2>
+                    </Link>
                     <ul style={{marginLeft: '-20px', marginTop: '-10px'}}>
                     {category.sub_categories.map((sub_category) => (
-                        <li>{sub_category.name}</li>
+                        <Link to={'/' + page.name + '/' + category.name + '/' + sub_category.name} style={{textDecoration: 'none', color: 'black'}}>
+                            <li>{sub_category.name}</li>
+                        </Link>
                     ))}
                     </ul>
                     </span>
             ))}
+            <span style={{maxWidth: '300px', marginLeft: '40px'}}>
+                <img style={{height: '110px'}} src={page.nav_image1}/>
+                <img style={{marginTop: "15px", height: '110px'}} src={page.nav_image2}/>
+            </span>
         </div >
     ))}
 </>
