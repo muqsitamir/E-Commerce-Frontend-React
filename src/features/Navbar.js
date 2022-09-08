@@ -11,14 +11,13 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import {Grid, Stack} from "@mui/material";
+import {Grid} from "@mui/material";
 import { Link } from "react-router-dom";
 import SimpleAccordion from '../components/Accordion'
 import axios from "axios";
 import {useEffect} from "react";
 import {useDispatch} from "react-redux";
 
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const Header = {
     // 'Access-Control-Allow-Origin': '*',
@@ -29,8 +28,7 @@ const Header = {
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState("hidden");
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const [hoverStyle, setHoverStyle] = React.useState({weight: '', scale: ''});
+  const [hoverStyle, setHoverStyle] = React.useState({weight: 'bold', color: '#363636', scale: 'scale(1.0)'});
   const [menuData, setMenuData] = React.useState([]);
   const dispatch = useDispatch();
 
@@ -42,7 +40,7 @@ const ResponsiveAppBar = () => {
         let config = {
             headers: Header,
         };
-        axios.get(`http://0.0.0.0:8000/shop/api/sports/`, config).then((res) => {
+        axios.get(`http://127.0.0.1:8000/shop/api/sports_nav/`, config).then((res) => {
             dispatch(setMenuData(res.data.results));
         }).catch((err) => {
             // dispatch(setSnackBar(err.response.data.non_field_errors[0]));
@@ -55,31 +53,30 @@ const ResponsiveAppBar = () => {
       let visibility = anchorElNav === "hidden" ? "visible" : "hidden";
       setAnchorElNav(visibility);
   };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
 
   const handleHover = (event) => {
       let id = event.target.id.includes("-id") ? event.target.id : event.target.id + "-id";
+      let id2 = event.target.id.includes("-id") ? event.target.id.replace('-id', '') : event.target.id;
       document.getElementById(id).style.visibility = "visible";
-      setHoverStyle({style: 'italic', color: '#1976d2', scale: 'scale(1.2)'});
+      document.getElementById(id2).style.fontStyle = "italic";
+      document.getElementById(id2).style.color = '#1976d2';
+      document.getElementById(id2).style.transform = "scale(1.2)";
   };
 
   const handleUnhover = (event) => {
       let id = event.target.id.includes("-id") ? event.target.id : event.target.id + "-id";
+      let id2 = event.target.id.includes("-id") ? event.target.id.replace('-id', '') : event.target.id;
       document.getElementById(id).style.visibility = "hidden";
-      setHoverStyle({weight: 'bold', color: '#363636', scale: 'scale(1.0)'});
+      document.getElementById(id2).style.fontStyle = "";
+      document.getElementById(id2).style.color = '#363636';
+      document.getElementById(id2).style.transform = "scale(1.0)";
   };
   return (
 <>
-    <AppBar position="static" sx={{backgroundColor: '#ffffff', color: '#1976d2', height: {xs: '60px', sm: '60px', md: '150px'}}}>
+    <AppBar position="static" sx={{marginBottom: '1px', backgroundColor: '#ffffff', color: '#1976d2', height: {xs: '60px', sm: '60px', md: '150px'}}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters >
-            <Box sx={{height: '10px', marginTop: '-50px', marginLeft: '20%', display: {xs: 'none', sm: "none", md: "inline-block"}}}>
+            <Box sx={{height: '10px', marginTop: '-50px', marginLeft: '10%', display: {xs: 'none', sm: "none", md: "inline-block"}}}>
                 <Link to='/'>
                     <img style={{height: '120px', marginRight: 1}} src={require('../images/logo.png')} />
                 </Link>
@@ -99,35 +96,6 @@ const ResponsiveAppBar = () => {
           <Box sx={{display: {xs: 'flex', md: "none"}, marginTop:{xs: '10px', sm: '0px'}, flexGrow: 1.4}}>
              <Link to='/'><img style={{height: '40px'}} src={require('../images/logo.png')} /></Link>
           </Box>
-          <Box sx={{ flexGrow: 0, position: 'fixed', right: 20}}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
         </Toolbar>
           <Grid container alignItems='center' justifyContent='center' direction='column' >
             <Box sx={{ marginTop: '37px',maxHeight: '10px', flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
@@ -138,7 +106,7 @@ const ResponsiveAppBar = () => {
                     key={page.name}
                     onMouseEnter={handleHover}
                     onMouseLeave={handleUnhover}
-                    sx={{mx: 1,maxHeight: '35px', my: 2, fontWeight: 'bold',display: 'block', color: hoverStyle.color, fontStyle: hoverStyle.style, transform: hoverStyle.scale }}
+                    sx={{mx: 1,maxHeight: '35px', my: 2, fontWeight: 'bold',display: 'block', color: '#363636'}}
                     >
                     {page.name}
                 </Button>
@@ -148,11 +116,11 @@ const ResponsiveAppBar = () => {
           </Grid>
       </Container>
     </AppBar>
-    <Box sx={{display: { xs: 'block', md: 'none' }, visibility: anchorElNav, backgroundColor: 'white', marginTop: "2px", position: "fixed", right: 0, left: 0}}>
+    <Box sx={{ zIndex: 1, display: { xs: 'block', md: 'none' }, visibility: anchorElNav, backgroundColor: 'white', marginTop: "0px", position: "absolute", right: 0, left: 0}}>
         <SimpleAccordion mainItems={menuData}/>
     </Box >
     {menuData.map((page) => (
-        <div id={page.name + "-id"} onMouseEnter={handleHover} onMouseLeave={handleUnhover} style={{columnGap: '10px', display: 'flex', justifyContent: 'center', alignItems: "center", alignSelf: 'start', boxShadow: '0px 15px 10px -15px #111', visibility: "hidden", height: '330px', backgroundColor: 'white', marginTop: -6, position: "fixed", right: 0, left: 0}}>
+        <div id={page.name + "-id"} onMouseEnter={handleHover} onMouseLeave={handleUnhover} style={{zIndex: 1, columnGap: '10px', display: 'flex', justifyContent: 'center', alignItems: "center", alignSelf: 'start', boxShadow: '0px 15px 10px -15px #111', visibility: "hidden", height: '330px', backgroundColor: 'white', marginTop: -6, position: "absolute", right: 0, left: 0}}>
             <span style={{marginLeft: '30px', height: '300px'}}>
                 <Link to={'/'+ page.name} style={{textDecoration: 'none', color: 'black'}}>
                     <h1 style={{fontStyle: "italic"}}>{page.name}</h1>

@@ -36,7 +36,7 @@ export default function MessageCarousel() {
         let config = {
             headers: Header,
         };
-        axios.get(`http://0.0.0.0:8000/shop/api/messages/`, config).then((res) => {
+        axios.get(`http://127.0.0.1:8000/shop/api/messages/`, config).then((res) => {
             dispatch(setMessages(res.data.results));
         }).catch((err) => {
             // dispatch(setSnackBar(err.response.data.non_field_errors[0]));
