@@ -1,17 +1,21 @@
 import './App.css';
-import Product from "./features/listing/Product";
-import Listing from "./features/listing/Listing";
 import Main from "./pages/Main";
-import AdStrip from "./features/AdStrip";
-import NavBar from "./features/Navbar";
+import AdStrip from "./headers/AdStrip";
+import NavBar from "./headers/Navbar";
+import Footer from "./footers/InfoLinks";
+import {Route, Routes} from "react-router-dom";
+import Sport from "./pages/Sport";
 
 function App() {
   return (
-      // <Listing/>
       <>
         <AdStrip/>
         <NavBar/>
-        <Main/>
+        <Routes>
+            <Route path='/' element={<Main/>}/>
+            <Route path="/sport/:id" element={<Sport/>}/>
+        </Routes>
+        <Footer/>
       </>
   );
 }

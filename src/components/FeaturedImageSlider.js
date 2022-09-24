@@ -3,49 +3,20 @@ import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
-import {useDispatch} from "react-redux";
-import {useEffect, useState} from "react";
-import axios from "axios";
-import Button from "@mui/material/Button";
-import {MobileStepper} from "@mui/material";
 import {Link} from "react-router-dom";
+import {useState} from "react";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
-
-const Header = {
-    // 'Access-Control-Allow-Origin': '*',
-    // 'Access-Control-Allow-Headers': "*",
-    // 'Accept': '*/*'
-};
-
-function SwipeableTextMobileStepper() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-      dispatch(getFeaturedImages())
-  }, []);
-
+function SwipeableTextMobileStepper(props) {
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
-  const [featuredImages, setFeaturedImages] = useState([]);
 
   const handleStepChange = (step) => {
     setActiveStep(step);
   };
 
-  const getFeaturedImages = () => (dispatch) => {
-        let config = {
-            headers: Header,
-        };
-        axios.get(`http://127.0.0.1:8000/shop/api/featured_images/`, config).then((res) => {
-            dispatch(setFeaturedImages(res.data.results));
-        }).catch((err) => {
-            // dispatch(setSnackBar(err.response.data.non_field_errors[0]));
-        }).finally(() => {
-            // dispatch(showLoadingScreen(false));
-        })
-  }
+
   return (
       <Box sx={{position: 'static'}}>
           <AutoPlaySwipeableViews
@@ -54,7 +25,7 @@ function SwipeableTextMobileStepper() {
             onChangeIndex={handleStepChange}
             enableMouseEvents
           >
-            {featuredImages.map((step, index) => (
+            {props.images.map((step) => (
               <div>
                     <Link to={step.link}>
                         <Box

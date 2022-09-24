@@ -17,14 +17,13 @@ export default function SimpleAccordion(props) {
           id="panel1a-header"
         >
           <Typography sx={{fontWeight: 'bold', fontSize: 'large'}} >
-            <Link to={'/' + item.name} style={{textDecoration: 'none', color: "#1976d2"}}>{item.name}</Link>
+            <Link to={"/sport/" + item.name} style={{textDecoration: 'none', color: "#1976d2"}}>{item.name}</Link>
           </Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
             {item.categories.map((category) => (
               <div>
-                  {props.mainItems.map((item) => (
                  <Accordion>
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon sx={{color: "#1976d2"}}/>}
@@ -43,7 +42,6 @@ export default function SimpleAccordion(props) {
                     ))}
                   </AccordionDetails>
                 </Accordion>
-                  ))}
               </div>
             ))}
           </Typography>

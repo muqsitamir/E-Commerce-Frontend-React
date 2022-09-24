@@ -9,13 +9,6 @@ import axios from "axios";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
-const Header = {
-    // 'Access-Control-Allow-Origin': '*',
-    // 'Access-Control-Allow-Headers': "*",
-    // 'Accept': '*/*'
-};
-
-
 export default function MessageCarousel() {
   const dispatch = useDispatch();
 
@@ -34,7 +27,7 @@ export default function MessageCarousel() {
 
   const getMessages = () => (dispatch) => {
         let config = {
-            headers: Header,
+            headers: {},
         };
         axios.get(`http://127.0.0.1:8000/shop/api/messages/`, config).then((res) => {
             dispatch(setMessages(res.data.results));

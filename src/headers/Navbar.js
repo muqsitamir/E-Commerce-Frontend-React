@@ -3,14 +3,9 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
 import {Grid} from "@mui/material";
 import { Link } from "react-router-dom";
 import SimpleAccordion from '../components/Accordion'
@@ -19,16 +14,8 @@ import {useEffect} from "react";
 import {useDispatch} from "react-redux";
 
 
-const Header = {
-    // 'Access-Control-Allow-Origin': '*',
-    // 'Access-Control-Allow-Headers': "*",
-    // 'Accept': '*/*'
-};
-
-
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState("hidden");
-  const [hoverStyle, setHoverStyle] = React.useState({weight: 'bold', color: '#363636', scale: 'scale(1.0)'});
   const [menuData, setMenuData] = React.useState([]);
   const dispatch = useDispatch();
 
@@ -37,10 +24,7 @@ const ResponsiveAppBar = () => {
     }, []);
 
   const getMenuData = () => (dispatch) => {
-        let config = {
-            headers: Header,
-        };
-        axios.get(`http://127.0.0.1:8000/shop/api/sports_nav/`, config).then((res) => {
+        axios.get(`http://127.0.0.1:8000/shop/api/sports/?nav=true`).then((res) => {
             dispatch(setMenuData(res.data.results));
         }).catch((err) => {
             // dispatch(setSnackBar(err.response.data.non_field_errors[0]));
@@ -100,7 +84,7 @@ const ResponsiveAppBar = () => {
           <Grid container alignItems='center' justifyContent='center' direction='column' >
             <Box sx={{ marginTop: '37px',maxHeight: '10px', flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {menuData.map((page) => (
-                <Link to={'/'+ page.name} style={{textDecoration: 'none'}}>
+                <Link to={"/" + "sport/" + page.name} style={{textDecoration: 'none'}}>
                 <Button
                     id={page.name}
                     key={page.name}
@@ -122,7 +106,7 @@ const ResponsiveAppBar = () => {
     {menuData.map((page) => (
         <div id={page.name + "-id"} onMouseEnter={handleHover} onMouseLeave={handleUnhover} style={{zIndex: 1, columnGap: '10px', display: 'flex', justifyContent: 'center', alignItems: "center", alignSelf: 'start', boxShadow: '0px 15px 10px -15px #111', visibility: "hidden", height: '330px', backgroundColor: 'white', marginTop: -6, position: "absolute", right: 0, left: 0}}>
             <span style={{marginLeft: '30px', height: '300px'}}>
-                <Link to={'/'+ page.name} style={{textDecoration: 'none', color: 'black'}}>
+                <Link to={"/" + "sport/" + page.name} style={{textDecoration: 'none', color: 'black'}}>
                     <h1 style={{fontStyle: "italic"}}>{page.name}</h1>
                 </Link>
                 <p style={{color: '#7a7a7a', fontSize: '11px', maxWidth: '300px'}}>{page.description}</p>
