@@ -6,18 +6,23 @@ import Footer from "./footers/InfoLinks";
 import {Route, Routes} from "react-router-dom";
 import Sport from "./pages/Sport";
 
+
 function App() {
-  return (
+
+    return (
       <>
         <AdStrip/>
         <NavBar/>
         <Routes>
-            <Route path='/' element={<Main/>}/>
-            <Route path="/sport/:id" element={<Sport/>}/>
+            {/*<Route path='/' element={<Main/>}/>*/}
+            <Route path='/(.*)' element={<Sport/>}/>
+            {/*    {["/home", "/users", "/widgets", "/Volleyball"].map((path) =>*/}
+            {/*        <Route path={path} element={<Sport/>}  />*/}
+            {/*    )}*/}
         </Routes>
         <Footer/>
       </>
-  );
+    );
 }
 
 export default App;

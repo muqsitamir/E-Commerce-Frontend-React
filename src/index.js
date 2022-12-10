@@ -8,6 +8,8 @@ import { store } from "./app/store";
 import { BrowserRouter } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+export const backend_url = "http://127.0.0.1:8000";
+
 root.render(
   // <React.StrictMode>
     <Provider store={store}>

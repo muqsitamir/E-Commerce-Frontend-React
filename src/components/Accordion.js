@@ -22,7 +22,7 @@ export default function SimpleAccordion(props) {
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            {item.categories.map((category) => (
+            {item.children.map((category) => (
               <div>
                  <Accordion>
                   <AccordionSummary
@@ -35,7 +35,7 @@ export default function SimpleAccordion(props) {
                     </Typography>
                   </AccordionSummary>
                   <AccordionDetails>
-                    {category.sub_categories.map((sub_category) => (
+                    {category.children.map((sub_category) => (
                       <Typography sx={{marginLeft: '30px', fontWeight: 'bold'}} >
                         <Link to={'/' + item.name + '/' + category.name + '/' + sub_category.name} style={{textDecoration: 'none', color: '#363636'}}>{sub_category.name}</Link>
                       </Typography>

@@ -11,32 +11,22 @@ import { Link } from "react-router-dom";
 import SimpleAccordion from '../components/Accordion'
 import axios from "axios";
 import {useEffect} from "react";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {getCategorys, selectCategorys} from "../slices/categorySlice";
 
 
 const ResponsiveAppBar = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState("hidden");
-  const [menuData, setMenuData] = React.useState([]);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-        dispatch(getMenuData())
+    const {results: menuData} = useSelector(selectCategorys);
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getCategorys())
     }, []);
+    const [anchorElNav, setAnchorElNav] = React.useState("hidden");
 
-  const getMenuData = () => (dispatch) => {
-        axios.get(`http://127.0.0.1:8000/shop/api/sports/?nav=true`).then((res) => {
-            dispatch(setMenuData(res.data.results));
-        }).catch((err) => {
-            // dispatch(setSnackBar(err.response.data.non_field_errors[0]));
-        }).finally(() => {
-            // dispatch(showLoadingScreen(false));
-        })
-  }
-
-  const handleClickNavMenu = () => {
+    const handleClickNavMenu = () => {
       let visibility = anchorElNav === "hidden" ? "visible" : "hidden";
       setAnchorElNav(visibility);
-  };
+    };
 
   const handleHover = (event) => {
       let id = event.target.id.includes("-id") ? event.target.id : event.target.id + "-id";
@@ -65,7 +55,7 @@ const ResponsiveAppBar = () => {
                     <img style={{height: '120px', marginRight: 1}} src={require('../images/logo.png')} />
                 </Link>
             </Box>
-            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }}}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -111,13 +101,13 @@ const ResponsiveAppBar = () => {
                 </Link>
                 <p style={{color: '#7a7a7a', fontSize: '11px', maxWidth: '300px'}}>{page.description}</p>
             </span>
-            {page.categories.map((category) => (
+            {page.children.map((category) => (
                     <span style={{height: '250px'}}>
                     <Link to={'/' + page.name + '/' +category.name} style={{textDecoration: 'none', color: 'black'}}>
                         <h2>{category.name}</h2>
                     </Link>
                     <ul style={{marginLeft: '-20px', marginTop: '-10px'}}>
-                    {category.sub_categories.map((sub_category) => (
+                    {category.children.map((sub_category) => (
                         <Link to={'/' + page.name + '/' + category.name + '/' + sub_category.name} style={{textDecoration: 'none', color: 'black'}}>
                             <li>{sub_category.name}</li>
                         </Link>

@@ -4,41 +4,24 @@ import Box from '@mui/material/Box';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
 import {useDispatch, useSelector} from "react-redux";
-import {useEffect, useState} from "react";
-import axios from "axios";
+import {useEffect} from "react";
+import {getMessages, selectMessages} from "../slices/messageSlice";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 export default function MessageCarousel() {
+  const {results: messages} = useSelector(selectMessages);
   const dispatch = useDispatch();
 
   useEffect(() => {
       dispatch(getMessages())
   }, []);
-
-  const [messages, setMessages] = useState([]);
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
 
   const handleStepChange = (step) => {
     setActiveStep(step);
   };
-
-
-  const getMessages = () => (dispatch) => {
-        let config = {
-            headers: {},
-        };
-        axios.get(`http://127.0.0.1:8000/shop/api/messages/`, config).then((res) => {
-            dispatch(setMessages(res.data.results));
-        }).catch((err) => {
-            // dispatch(setSnackBar(err.response.data.non_field_errors[0]));
-        }).finally(() => {
-            // dispatch(showLoadingScreen(false));
-        })
-  }
-
-
 
   return (
     <Box sx={{ maxWidth: 400, flexGrow: 1 }}>

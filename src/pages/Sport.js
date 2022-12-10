@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from 'react'
-import {useParams} from "react-router";
+import {useLocation, useParams} from "react-router";
 import axios from "axios";
 import {useDispatch} from "react-redux";
 import FeaturedImageSlider from "../components/FeaturedImageSlider";
 import Listing from "../components/Listing";
 
 
-export default function Sport(){
+export default function Sport(props){
+    const {state} = useLocation();
     const { name } = useParams();
     const [sport, setSport] = useState([]);
     const dispatch = useDispatch();
@@ -52,7 +53,7 @@ export default function Sport(){
     return(
       <>
         <FeaturedImageSlider images={featured}/>
-        <Listing items={sport.categories}/>
+          muqsit
       </>
     );
 }
