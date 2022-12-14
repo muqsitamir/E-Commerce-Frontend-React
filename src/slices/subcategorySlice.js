@@ -4,29 +4,29 @@ import { backend_url } from "../index.js"
 // import {showLoadingScreen, setSnackBar} from "../../reusable_components/site_data/siteDataSlice";
 
 
-export const featuredImageSlice = createSlice({
-  name: 'featuredImages',
+export const subcategorySlice = createSlice({
+  name: 'subcategorys',
   initialState: {
-      featuredImages: {
+      subcategorys: {
           "count": 0,
           "results": []
       },
   },
   reducers: {
-      setFeaturedImages: (state, action) => {
-          state.featuredImages.results = action.payload.results;
-          state.featuredImages.count = action.payload.count;
+      setSubcategorys: (state, action) => {
+          state.subcategorys.results = action.payload.results;
+          state.subcategorys.count = action.payload.count;
       },
   },
 })
 
-export const getFeaturedImages = (e) => (dispatch) => {
+export const getSubcategorys = (e) => (dispatch) => {
     let category_name = e == null ? "" : "?category_name=" + e;
     let config = {
         headers: {},
     };
-    axios.get(`${backend_url}/shop/api/featured_image/${category_name}`, config).then((res) => {
-        dispatch(setFeaturedImages(res.data));
+    axios.get(`${backend_url}/shop/api/category/${category_name}`, config).then((res) => {
+        dispatch(setSubcategorys(res.data));
     }).catch((err) => {
         // dispatch(setSnackBar(err.response.data.non_field_errors[0]));
     }).finally(() => {
@@ -36,7 +36,7 @@ export const getFeaturedImages = (e) => (dispatch) => {
 
 
 // Action creators are generated for each case reducer function
-export const { setFeaturedImages } = featuredImageSlice.actions
-export const selectFeaturedImages = (state) => state.featuredImages.featuredImages;
-export default featuredImageSlice.reducer
+export const { setSubcategorys } = subcategorySlice.actions
+export const selectSubcategorys = (state) => state.subcategorys.subcategorys;
+export default subcategorySlice.reducer
 

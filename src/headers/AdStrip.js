@@ -19,11 +19,11 @@ export default function AdStrip() {
   }
 
   let contents = visibility ?
-      <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ flexGrow: 1}}>
       <AppBar position="static">
-        <Toolbar sx={{justifyContent: 'center'}} variant="dense">
+        <Toolbar sx={{justifyContent: 'center', height: 50 }} variant="dense">
             <MessageCarousel/>
-        <CancelIcon onClick={handleAdStrip} sx={{position: "absolute", right: "15px", "&:hover": {color: "gray"}}}/>
+        <CancelIcon onClick={handleAdStrip} sx={{position: "absolute", right: "65px", top: "13px", "&:hover": {color: "gray"}}}/>
         </Toolbar>
       </AppBar>
     </Box> : null;

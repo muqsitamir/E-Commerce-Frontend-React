@@ -17,7 +17,10 @@ export default function SimpleAccordion(props) {
           id="panel1a-header"
         >
           <Typography sx={{fontWeight: 'bold', fontSize: 'large'}} >
-            <Link to={"/sport/" + item.name} style={{textDecoration: 'none', color: "#1976d2"}}>{item.name}</Link>
+            <Link to={{
+                        pathname: '/' + item.name,
+                        state: {main_id: item.id}
+                }} style={{textDecoration: 'none', color: "#1976d2"}}>{item.name}</Link>
           </Typography>
         </AccordionSummary>
         <AccordionDetails>
@@ -31,13 +34,19 @@ export default function SimpleAccordion(props) {
                     id="panel1a-header"
                   >
                     <Typography sx={{fontWeight: 'bold'}} >
-                      <Link to={'/' + item.name + '/' + category.name} style={{textDecoration: 'none', color: '#363636'}}>{category.name}</Link>
+                      <Link to={{
+                        pathname: '/' + item.name + '/' + category.name,
+                        state: {main_id: item.id, sub_id: category.id}
+                }} style={{textDecoration: 'none', color: '#363636'}}>{category.name}</Link>
                     </Typography>
                   </AccordionSummary>
                   <AccordionDetails>
                     {category.children.map((sub_category) => (
                       <Typography sx={{marginLeft: '30px', fontWeight: 'bold'}} >
-                        <Link to={'/' + item.name + '/' + category.name + '/' + sub_category.name} style={{textDecoration: 'none', color: '#363636'}}>{sub_category.name}</Link>
+                        <Link to={{
+                        pathname: '/' + item.name + '/' + category.name + '/' + sub_category.name,
+                        state: {main_id: item.id, sub_id: category.id, sub_sub_id:sub_category.id}
+                }}  style={{textDecoration: 'none', color: '#363636'}}>{sub_category.name}</Link>
                       </Typography>
                     ))}
                   </AccordionDetails>

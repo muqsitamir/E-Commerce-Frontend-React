@@ -19,7 +19,7 @@ const ResponsiveAppBar = () => {
     const {results: menuData} = useSelector(selectCategorys);
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(getCategorys())
+        dispatch(getCategorys(null))
     }, []);
     const [anchorElNav, setAnchorElNav] = React.useState("hidden");
 
@@ -74,7 +74,10 @@ const ResponsiveAppBar = () => {
           <Grid container alignItems='center' justifyContent='center' direction='column' >
             <Box sx={{ marginTop: '37px',maxHeight: '10px', flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {menuData.map((page) => (
-                <Link to={"/" + "sport/" + page.name} style={{textDecoration: 'none'}}>
+                <Link to={{
+                        pathname: '/' + page.name,
+                        state: {main_id: page.id}
+                    }} style={{textDecoration: 'none'}}>
                 <Button
                     id={page.name}
                     key={page.name}
@@ -96,19 +99,28 @@ const ResponsiveAppBar = () => {
     {menuData.map((page) => (
         <div id={page.name + "-id"} onMouseEnter={handleHover} onMouseLeave={handleUnhover} style={{zIndex: 1, columnGap: '10px', display: 'flex', justifyContent: 'center', alignItems: "center", alignSelf: 'start', boxShadow: '0px 15px 10px -15px #111', visibility: "hidden", height: '330px', backgroundColor: 'white', marginTop: -6, position: "absolute", right: 0, left: 0}}>
             <span style={{marginLeft: '30px', height: '300px'}}>
-                <Link to={"/" + "sport/" + page.name} style={{textDecoration: 'none', color: 'black'}}>
+                <Link to={{
+                        pathname: '/' + page.name,
+                        state: {main_id: page.id}
+                }} style={{textDecoration: 'none', color: 'black'}}>
                     <h1 style={{fontStyle: "italic"}}>{page.name}</h1>
                 </Link>
                 <p style={{color: '#7a7a7a', fontSize: '11px', maxWidth: '300px'}}>{page.description}</p>
             </span>
             {page.children.map((category) => (
                     <span style={{height: '250px'}}>
-                    <Link to={'/' + page.name + '/' +category.name} style={{textDecoration: 'none', color: 'black'}}>
+                    <Link to={{
+                        pathname: '/' + page.name + '/' + category.name,
+                        state: {main_id: page.id, sub_id: category.id}
+                        }} style={{textDecoration: 'none', color: 'black'}}>
                         <h2>{category.name}</h2>
                     </Link>
                     <ul style={{marginLeft: '-20px', marginTop: '-10px'}}>
                     {category.children.map((sub_category) => (
-                        <Link to={'/' + page.name + '/' + category.name + '/' + sub_category.name} style={{textDecoration: 'none', color: 'black'}}>
+                        <Link to={{
+                            pathname: '/' + page.name + '/' + category.name + '/' + sub_category.name,
+                            state: {main_id: page.id, sub_id: category.id, sub_sub_id:sub_category.id}
+                            }} style={{textDecoration: 'none', color: 'black'}}>
                             <li>{sub_category.name}</li>
                         </Link>
                     ))}

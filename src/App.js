@@ -3,8 +3,9 @@ import Main from "./pages/Main";
 import AdStrip from "./headers/AdStrip";
 import NavBar from "./headers/Navbar";
 import Footer from "./footers/InfoLinks";
-import {Route, Routes} from "react-router-dom";
-import Sport from "./pages/Sport";
+import {Route, Switch} from "react-router-dom";
+import Category from "./pages/Category";
+import {useState} from "react";
 
 
 function App() {
@@ -13,13 +14,10 @@ function App() {
       <>
         <AdStrip/>
         <NavBar/>
-        <Routes>
-            {/*<Route path='/' element={<Main/>}/>*/}
-            <Route path='/(.*)' element={<Sport/>}/>
-            {/*    {["/home", "/users", "/widgets", "/Volleyball"].map((path) =>*/}
-            {/*        <Route path={path} element={<Sport/>}  />*/}
-            {/*    )}*/}
-        </Routes>
+        <Switch>
+            <Route exact path='/' component={Main}/>
+            <Route path='\/(.+)\/' render={(props) => <Category/>}/>
+        </Switch>
         <Footer/>
       </>
     );

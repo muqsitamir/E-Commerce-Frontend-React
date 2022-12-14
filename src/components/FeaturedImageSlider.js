@@ -31,7 +31,7 @@ function SwipeableTextMobileStepper(props) {
                         <Box
                         component="img"
                         sx={{
-                          height: {xs: 220, sm: 330, md: 540},
+                          height: {xs: 220, sm: 330, md: 640},
                           display: 'block',
                           maxWidth: "100%",
                           width: '100%',

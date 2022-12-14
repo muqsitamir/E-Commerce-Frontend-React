@@ -20,11 +20,12 @@ export const categorySlice = createSlice({
   },
 })
 
-export const getCategorys = () => (dispatch) => {
+export const getCategorys = (e) => (dispatch) => {
+    let category_name = e == null ? "" : "?category_name=" + e;
     let config = {
         headers: {},
     };
-    axios.get(`${backend_url}/shop/api/category/`, config).then((res) => {
+    axios.get(`${backend_url}/shop/api/category/${category_name}`, config).then((res) => {
         dispatch(setCategorys(res.data));
     }).catch((err) => {
         // dispatch(setSnackBar(err.response.data.non_field_errors[0]));
