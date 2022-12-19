@@ -5,7 +5,7 @@ import NavBar from "./headers/Navbar";
 import Footer from "./footers/InfoLinks";
 import {Route, Switch} from "react-router-dom";
 import Category from "./pages/Category";
-import {useState} from "react";
+import Viewall from "./pages/Viewall";
 
 
 function App() {
@@ -16,6 +16,7 @@ function App() {
         <NavBar/>
         <Switch>
             <Route exact path='/' component={Main}/>
+            <Route path="(.+)View-All" render={() => <Viewall/>}/>
             <Route path='\/(.+)\/' render={(props) => <Category/>}/>
         </Switch>
         <Footer/>

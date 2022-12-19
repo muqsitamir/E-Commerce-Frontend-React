@@ -9,7 +9,6 @@ import Button from '@mui/material/Button';
 import {Grid} from "@mui/material";
 import { Link } from "react-router-dom";
 import SimpleAccordion from '../components/Accordion'
-import axios from "axios";
 import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {getCategorys, selectCategorys} from "../slices/categorySlice";
@@ -83,7 +82,7 @@ const ResponsiveAppBar = () => {
                     key={page.name}
                     onMouseEnter={handleHover}
                     onMouseLeave={handleUnhover}
-                    sx={{mx: 1,maxHeight: '35px', my: 2, fontWeight: 'bold',display: 'block', color: '#363636'}}
+                    sx={{mx: 1,maxHeight: '35px', my: 2, fontWeight: 'bold', display: 'block', color: 'transparent', fontSize: "12px", letterSpacing: "3.6px", lineHeight: "13px"}}
                     >
                     {page.name}
                 </Button>
@@ -97,13 +96,13 @@ const ResponsiveAppBar = () => {
         <SimpleAccordion mainItems={menuData}/>
     </Box >
     {menuData.map((page) => (
-        <div id={page.name + "-id"} onMouseEnter={handleHover} onMouseLeave={handleUnhover} style={{zIndex: 1, columnGap: '10px', display: 'flex', justifyContent: 'center', alignItems: "center", alignSelf: 'start', boxShadow: '0px 15px 10px -15px #111', visibility: "hidden", height: '330px', backgroundColor: 'white', marginTop: -6, position: "absolute", right: 0, left: 0}}>
+        <div id={page.name + "-id"} onMouseEnter={handleHover} onMouseLeave={handleUnhover} style={{zIndex: 1, columnGap: '20px', display: 'flex', justifyContent: 'center', alignItems: "center", alignSelf: 'start', boxShadow: '0px 15px 10px -15px #111', visibility: "hidden", height: '330px', backgroundColor: 'white', marginTop: -6, position: "absolute", right: 0, left: 0}}>
             <span style={{marginLeft: '30px', height: '300px'}}>
                 <Link to={{
                         pathname: '/' + page.name,
                         state: {main_id: page.id}
                 }} style={{textDecoration: 'none', color: 'black'}}>
-                    <h1 style={{fontStyle: "italic"}}>{page.name}</h1>
+                    <h1 id="navbar_heading" style={{fontStyle: "italic"}}>{page.name}</h1>
                 </Link>
                 <p style={{color: '#7a7a7a', fontSize: '11px', maxWidth: '300px'}}>{page.description}</p>
             </span>
@@ -113,7 +112,7 @@ const ResponsiveAppBar = () => {
                         pathname: '/' + page.name + '/' + category.name,
                         state: {main_id: page.id, sub_id: category.id}
                         }} style={{textDecoration: 'none', color: 'black'}}>
-                        <h2>{category.name}</h2>
+                        <h2 id="navbar_heading">{category.name}</h2>
                     </Link>
                     <ul style={{marginLeft: '-20px', marginTop: '-10px'}}>
                     {category.children.map((sub_category) => (
@@ -121,7 +120,7 @@ const ResponsiveAppBar = () => {
                             pathname: '/' + page.name + '/' + category.name + '/' + sub_category.name,
                             state: {main_id: page.id, sub_id: category.id, sub_sub_id:sub_category.id}
                             }} style={{textDecoration: 'none', color: 'black'}}>
-                            <li>{sub_category.name}</li>
+                            <li id="navbar_heading">{sub_category.name}</li>
                         </Link>
                     ))}
                     </ul>
