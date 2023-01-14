@@ -6,6 +6,7 @@ import { autoPlay } from 'react-swipeable-views-utils';
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {getMessages, selectMessages} from "../slices/messageSlice";
+import {main_text_color} from "../index";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -34,7 +35,7 @@ export default function MessageCarousel() {
         {messages.map((step, index) => (
           <div>
             {Math.abs(activeStep - index) <= 2 ? (
-              <h4 style={{color: 'white', textAlign: 'center'}}> {step.message} {step.link ? <a href={step.link} style={{color: 'white'}}> Shop Now</a> : " "} </h4>
+              <h4 style={{color: 'white', textAlign: 'center'}}> {step.message} {step.link ? <a href={step.link} style={{color: main_text_color}}> Shop Now</a> : " "} </h4>
             ) : null}
           </div>
         ))}

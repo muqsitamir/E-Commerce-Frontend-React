@@ -5,6 +5,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {Link} from "react-router-dom";
+import {primary_color} from "../index";
 
 export default function SimpleAccordion(props) {
   return (
@@ -12,7 +13,7 @@ export default function SimpleAccordion(props) {
         {props.mainItems.map((item) => (
        <Accordion>
         <AccordionSummary
-          expandIcon={<ExpandMoreIcon sx={{color: "#1976d2"}}/>}
+          expandIcon={<ExpandMoreIcon sx={{color: primary_color}}/>}
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
@@ -20,7 +21,7 @@ export default function SimpleAccordion(props) {
             <Link to={{
                         pathname: '/' + item.name,
                         state: {main_id: item.id}
-                }} style={{textDecoration: 'none', color: "#1976d2"}}>{item.name}</Link>
+                }} style={{textDecoration: 'none', color: primary_color}}>{item.name}</Link>
           </Typography>
         </AccordionSummary>
         <AccordionDetails>
@@ -29,7 +30,7 @@ export default function SimpleAccordion(props) {
               <div>
                  <Accordion>
                   <AccordionSummary
-                    expandIcon={<ExpandMoreIcon sx={{color: "#1976d2"}}/>}
+                    expandIcon={<ExpandMoreIcon sx={{color: primary_color}}/>}
                     aria-controls="panel1a-content"
                     id="panel1a-header"
                   >

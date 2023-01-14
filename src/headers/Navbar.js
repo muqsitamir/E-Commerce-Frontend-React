@@ -12,6 +12,7 @@ import SimpleAccordion from '../components/Accordion'
 import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {getCategorys, selectCategorys} from "../slices/categorySlice";
+import {primary_color} from "../index";
 
 
 const ResponsiveAppBar = () => {
@@ -32,7 +33,7 @@ const ResponsiveAppBar = () => {
       let id2 = event.target.id.includes("-id") ? event.target.id.replace('-id', '') : event.target.id;
       document.getElementById(id).style.visibility = "visible";
       document.getElementById(id2).style.fontStyle = "italic";
-      document.getElementById(id2).style.color = '#1976d2';
+      document.getElementById(id2).style.color = primary_color;
       document.getElementById(id2).style.transform = "scale(1.2)";
   };
 
@@ -46,12 +47,12 @@ const ResponsiveAppBar = () => {
   };
   return (
 <>
-    <AppBar position="static" sx={{marginBottom: '1px', backgroundColor: '#ffffff', color: '#1976d2', height: {xs: '60px', sm: '60px', md: '150px'}}}>
+    <AppBar position="static" sx={{marginBottom: '1px', backgroundColor: '#ffffff', color: primary_color, height: {xs: '60px', sm: '60px', md: '150px'}}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters >
             <Box sx={{height: '10px', marginTop: '-50px', marginLeft: '10%', display: {xs: 'none', sm: "none", md: "inline-block"}}}>
                 <Link to='/'>
-                    <img style={{height: '120px', marginRight: 1}} src={require('../images/logo.png')} />
+                    <img style={{height: '120px', marginRight: 1, marginTop: -2}} src={require('../images/logo.jpg')} />
                 </Link>
             </Box>
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }}}>
@@ -82,7 +83,7 @@ const ResponsiveAppBar = () => {
                     key={page.name}
                     onMouseEnter={handleHover}
                     onMouseLeave={handleUnhover}
-                    sx={{mx: 1,maxHeight: '35px', my: 2, fontWeight: 'bold', display: 'block', color: 'transparent', fontSize: "12px", letterSpacing: "3.6px", lineHeight: "13px"}}
+                    sx={{mx: 1,maxHeight: '35px', my: 2, fontWeight: 'bold', display: 'block', color: '#363636', fontSize: "12px", letterSpacing: "3.6px", lineHeight: "13px"}}
                     >
                     {page.name}
                 </Button>

@@ -3,7 +3,7 @@ import categoryReducer from "../slices/categorySlice";
 import subcategoryReducer from "../slices/subcategorySlice";
 import messageReducer from "../slices/messageSlice";
 import featuredImageReducer from "../slices/featuredImageSlice";
-import productListReducer from "../slices/productListSlice";
+import productsReducer from "../slices/productsSlice";
 
 export const store = configureStore({
   reducer: {
@@ -11,6 +11,6 @@ export const store = configureStore({
     messages: messageReducer,
     featuredImages: featuredImageReducer,
     subcategorys: subcategoryReducer,
-    productlist: productListReducer,
+    products: productsReducer,
   },
 });

@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import Button from "@mui/material/Button";
 import {FormControl, Grid, Input, InputAdornment, InputLabel} from "@mui/material";
 import Typography from "@mui/material/Typography";
+import {primary_color} from "../index";
 
 export default function Footer(){
     const [email, setEmail] = useState("")
@@ -189,15 +190,15 @@ export default function Footer(){
         </div>
 
         <div style={{display: 'flex', justifyContent: 'center'}}>
-            <Button sx={{ marginLeft: '10px', textTransform: 'none'}} onClick={handleEmailSubmit} variant="contained" size="small">Submit</Button>
+            <Button sx={{ marginLeft: '10px', textTransform: 'none', backgroundColor: primary_color}} onClick={handleEmailSubmit} variant="contained" size="small">Submit</Button>
         </div>
 
         <div style={{marginTop: 90, display: 'flex', justifyContent: 'center'}}>
-            <Link to=''><img style={{paddingLeft: '5px'}} src={require('../images/logo.png')}/></Link>
+            <Link to=''><img style={{paddingLeft: '5px', height: 80}} src={require('../images/logo.jpg')}/></Link>
         </div>
 
-        <div style={{ marginBottom: '15px',display: 'flex', justifyContent: 'center', marginTop: '-25px'}}>
-            <p style={{textAlign: 'center', fontSize: '10px', fontWeight: 300, lineHeight: 3, color: '#707070'}}>© 2022 AI Sports Pak. All rights reserved. </p>
+        <div style={{ marginBottom: '15px',display: 'flex', justifyContent: 'center'}}>
+            <p style={{textAlign: 'center', fontSize: '10px', fontWeight: 300, lineHeight: 3, color: '#707070'}}>© 2022 Heritage Craft Pakistan. All rights reserved. </p>
         </div>
         </>
     );

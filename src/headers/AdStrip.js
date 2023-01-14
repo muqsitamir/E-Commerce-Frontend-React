@@ -5,6 +5,7 @@ import Toolbar from '@mui/material/Toolbar';
 import MessageCarousel from "../components/MessageCarousel";
 import CancelIcon from '@mui/icons-material/Cancel';
 import {useEffect} from "react";
+import {primary_color} from "../index";
 
 export default function AdStrip() {
   const [visibility, setVisibility] = React.useState(true);
@@ -21,7 +22,7 @@ export default function AdStrip() {
   let contents = visibility ?
       <Box sx={{ flexGrow: 1}}>
       <AppBar position="static">
-        <Toolbar sx={{justifyContent: 'center', height: 50 }} variant="dense">
+        <Toolbar sx={{justifyContent: 'center', height: 50, backgroundColor: primary_color }} variant="dense">
             <MessageCarousel/>
         <CancelIcon onClick={handleAdStrip} sx={{position: "absolute", right: "65px", top: "13px", "&:hover": {color: "gray"}}}/>
         </Toolbar>
