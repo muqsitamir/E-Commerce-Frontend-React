@@ -2,7 +2,7 @@ import React from 'react'
 import Breadcrumbs from "../components/Breadcrumbs";
 import Typography from "@mui/material/Typography";
 import {useDispatch, useSelector} from "react-redux";
-import {useEffect} from "@types/react";
+// import {useEffect} from "@types/react";
 import {getProductList, selectProductList} from "../slices/productListSlice";
 
 
@@ -10,10 +10,10 @@ export default function Viewall(props){
     const {results: productList} = useSelector(selectProductList);
 
     const dispatch = useDispatch();
-
-    useEffect(() => {
-      dispatch(getProductList())
-    }, []);
+    //
+    // useEffect(() => {
+    //   dispatch(getProductList())
+    // }, []);
 
 
     return(
