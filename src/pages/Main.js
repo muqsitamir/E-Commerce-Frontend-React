@@ -22,20 +22,20 @@ export default function Main(){
       <>
         <FeaturedImageSlider images={featuredImages.slice(0, Math.floor(featuredImages.length/2))} max_height={540} />
         <iframe
-          style={{height: 'calc(100vw/1.77777778)', width: "100vw", marginTop: "40px"}}
+          style={{height: 'calc(100vw/2.77777778)', width: "100vw", marginTop: "40px"}}
           id="iframe"
           title="Youtube video player"
           frameBorder='0'
-          src="https://www.youtube.com/embed/QZwx0_HFSCw?&playlist=QZwx0_HFSCw&autoplay=1&theme=dark&mute=1&rel=0&controls=0&loop=1&modestbranding=1&showinfo=0"/>
+          src="https://www.youtube.com/embed/pA_OZGztFHk?autoplay=1&theme=dark&mute=1&rel=0&controls=0&loop=1&modestbranding=1&showinfo=0"/>
         <CenteredHeading text='VIEW OUR BESTSELLERS' />
         <Listing items={categories} sizing={categories.length}/>
         <FeaturedImageSlider images={featuredImages.slice(Math.floor(featuredImages.length/2), featuredImages.length)} max_height={540}/>
         <iframe
-          style={{height: 'calc(100vw/1.77777778)', width: "100vw", marginTop: 40}}
+          style={{height: 'calc(100vw/2.77777778)', width: "100vw", marginTop: 40}}
           id="iframe"
           title="Youtube video player"
           frameBorder='0'
-          src="https://www.youtube.com/embed/QZwx0_HFSCw?&playlist=QZwx0_HFSCw&autoplay=1&theme=dark&mute=1&rel=0&controls=0&loop=1&modestbranding=1&showinfo=0"/>
+          src="https://www.youtube.com/embed/pA_OZGztFHk?autoplay=1&theme=dark&mute=1&rel=0&controls=0&loop=1&modestbranding=1&showinfo=0"/>
       </>
     );
 }
