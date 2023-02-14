@@ -19,7 +19,7 @@ export default function BasicBreadcrumbs(props) {
 
     let href = "";
     for(let i = 0; i < window.location.pathname.split("/").slice(1,-1).length; i++){
-        let page_name = window.location.pathname.split("/").slice(1,-1)[i];
+        let page_name = window.location.pathname.split("/").slice(1,-1)[i].replaceAll("%20", " ");
         href = href + "/"  + page_name;
         breadcrumbs.push(
         <Link underline="hover" key="1" color="inherit" href={href}>
@@ -27,7 +27,7 @@ export default function BasicBreadcrumbs(props) {
         </Link>
         )
     }
-    breadcrumbs.push(<Typography color="text.primary">{window.location.pathname.split("/").slice(-1)[0].replace("-", " ")}</Typography>)
+    breadcrumbs.push(<Typography color="text.primary">{window.location.pathname.split("/").slice(-1)[0].replace("-", " ").replaceAll("%20", " ")}</Typography>)
 
   return (
     <div role="presentation" >
