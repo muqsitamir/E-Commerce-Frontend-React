@@ -25,12 +25,13 @@ const Header = {
     // 'Access-Control-Allow-Headers': "*",
     // 'Accept': '*/*'
 };
-export const getProducts = (page) => (dispatch) => {
+export const getProducts = (page, category) => (dispatch) => {
     let config = {
         headers: Header,
     };
     let page_no = !page ? 1 : page;
-    axios.get(`${backend_url}/shop/api/products/?page=${page_no}`, config).then((res) => {
+    let cat = !category ? "" : `&category=${category.id}`;
+    axios.get(`${backend_url}/shop/api/products/?page=${page_no}${cat}`, config).then((res) => {
         dispatch(setProducts(res.data));
     }).catch((err) => {
         // dispatch(setSnackBar(err.response.data.non_field_errors[0]));

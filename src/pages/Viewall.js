@@ -1,9 +1,12 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import Breadcrumbs from "../components/Breadcrumbs";
 import Listing from "../components/ProductListing";
+import {useSelector} from "react-redux";
+import {getSubcategorys, selectSubcategorys} from "../slices/subcategorySlice";
 
 
 export default function Viewall(){
+    const {results: categorys} = useSelector(selectSubcategorys);
 
     return(
         <div style={{
@@ -20,7 +23,7 @@ export default function Viewall(){
                 width: '100%'
             }}>
                 <Breadcrumbs mt={1} ml={1}/>
-                <Listing></Listing>
+                <Listing category={categorys[0]}></Listing>
             </div>
 
         </div>

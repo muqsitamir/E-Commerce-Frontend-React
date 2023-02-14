@@ -5,20 +5,20 @@ import {getProducts} from "../slices/productsSlice";
 import { selectProducts } from "../slices/productsSlice";
 import Product from "./Product";
 
-export default function Listing() {
+export default function Listing(props) {
     const [state, setState] = useState({page: 1});
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(getProducts())
+        dispatch(getProducts(null, props.category))
     }, []);
 
     const {count, results: products} = useSelector(selectProducts);
 
     const handlePageChange = (event, newPage) => {
         if (newPage > state.page)
-            dispatch(getProducts(newPage));
+            dispatch(getProducts(newPage, props.category));
         if (newPage < state.page)
-            dispatch(getProducts(newPage));
+            dispatch(getProducts(newPage, props.category));
         setState({page: newPage});
     };
 
