@@ -8,7 +8,7 @@ import { store } from "./app/store";
 import { BrowserRouter } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-export const backend_url = "http://api.heritagecraft.pk";
+export const backend_url = "https://api.heritagecraft.pk";
 export const main_text_color = "rgb(253, 214, 16)";
 export const primary_color = "rgb(82, 79, 64)";
 
